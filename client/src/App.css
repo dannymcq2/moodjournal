@@ -1,0 +1,247 @@
+/* General Styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden; /* Prevents horizontal scrolling */
+}
+
+/* Main Container */
+.container {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.08);
+  width: 90%;
+  max-width: 950px; /* ✅ Balanced width */
+  text-align: center;
+  position: relative;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .container {
+    max-width: 800px; /* ✅ Slightly smaller for tablets */
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 90%; /* ✅ Adapts on smaller screens */
+  }
+}
+
+/* Mood Entry Animations */
+@keyframes moodFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes moodSlideOut {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Form */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px; /* Uniform spacing */
+  margin-bottom: 15px;
+}
+
+/* Input Fields */
+input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+input:focus {
+  border-color: #6a5acd;
+  outline: none;
+  box-shadow: 0px 0px 4px rgba(106, 90, 205, 0.3);
+}
+
+/* Add Mood Button */
+button {
+  background: #6a5acd;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 12px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 14px;
+  width: 80%;
+  max-width: 200px; /* Keeps button from stretching */
+}
+
+button:hover {
+  background: #5a4ac8;
+}
+
+/* Mood List */
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Mood List Items */
+li {
+  background: #f9f9fb;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.3s;
+  font-size: 16px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e0e0e0;
+  animation: moodFadeIn 0.3s ease-out;
+}
+
+/* Hover effect */
+li:hover {
+  transform: scale(1.02);
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Smooth delete animation */
+li.deleting {
+  animation: moodSlideOut 0.3s ease-out forwards;
+}
+
+/* Fix Mood List Stretching Issue */
+li span {
+  flex-grow: 1;
+  text-align: left;
+  font-weight: 500;
+  padding-left: 10px;
+}
+
+/* Delete Button */
+.delete-btn {
+  background: #ff7979;
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  border: none;
+  width: auto; /* ✅ Fixes button width */
+  min-width: 40px; /* ✅ Prevents shrinking too much */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-btn:hover {
+  background: #545454;
+}
+
+/* Chart Container */
+.chart-container {
+  margin-top: 20px;
+  padding: 15px;
+  background: none; /* ✅ Remove extra white box */
+  border-radius: 12px;
+  box-shadow: none; /* ✅ Prevents extra layering */
+  width: 100%;
+  max-width: 850px; /* ✅ Matches new width */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Responsive Chart */
+@media (max-width: 768px) {
+  .chart-container {
+    max-width: 90%;
+  }
+}
+
+/* Ensure the chart inside doesn’t create extra white space */
+.chart-container > div {
+  width: 100%;
+  max-width: 480px;
+  background: transparent; /* ✅ Removes background layers */
+}
+
+/* Dark Mode Styles */
+.dark-mode {
+  background-color: #1e1e1e;
+  color: white;
+}
+
+/* Dark Mode Container */
+.dark-mode .container {
+  background: #2b2b2b;
+  color: white;
+  box-shadow: none;
+}
+
+/* Dark Mode Inputs */
+.dark-mode input {
+  background: #444;
+  color: white;
+  border: 1px solid #666;
+}
+
+.dark-mode input::placeholder {
+  color: #bbb;
+}
+
+/* Dark Mode Mood List */
+.dark-mode li {
+  background: #333; /* Darker background for contrast */
+  color: white; /* ✅ Ensures text is visible */
+  border: 1px solid #555; /* Softer border for clarity */
+}
+
+/* Dark Mode Toggle Button */
+.toggle-dark {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: transparent;
+  color: #6a5acd;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.toggle-dark:hover {
+  color: #dad2f3;
+}
