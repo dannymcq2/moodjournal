@@ -18,7 +18,7 @@ function App() {
 
   // Fetch moods from backend
   useEffect(() => {
-    axios.get("http://localhost:5005/api/moods")
+    axios.get("https://moodjournal-lo9i.onrender.com")
       .then(response => setMoods(response.data))
       .catch(error => console.error("Error fetching moods:", error));
   }, []);
@@ -31,7 +31,7 @@ function App() {
 
       // Wait for animation to complete before removing
       setTimeout(async () => {
-        await axios.delete(`http://localhost:5005/api/moods/${id}`);
+        await axios.delete(`https://moodjournal-lo9i.onrender.com/${id}`);
         setMoods(moods.filter(m => m._id !== id)); // Remove from state
       }, 300); // Match animation duration
     } catch (error) {
@@ -45,7 +45,7 @@ function App() {
     if (!mood) return;
 
     try {
-      const response = await axios.post("http://localhost:5005/api/moods", {
+      const response = await axios.post("https://moodjournal-lo9i.onrender.com", {
         mood,
         description
       });
