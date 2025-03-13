@@ -16,40 +16,35 @@ function App() {
     localStorage.setItem("darkMode", newMode); // Save preference
   };
 
-  // Fetch moods from backend
   useEffect(() => {
-    axios.get("https://moodjournal-lo9i.onrender.com")
+    axios.get("https://moodjournal-lo9i.onrender.com/api/moods") // ✅ Correct endpoint
       .then(response => setMoods(response.data))
       .catch(error => console.error("Error fetching moods:", error));
   }, []);
   
-  // Function to delete a mood with animation
   const handleDelete = async (id) => {
     try {
-      // Apply deleting class
       setMoods(moods.map(m => m._id === id ? { ...m, deleting: true } : m));
 
-      // Wait for animation to complete before removing
       setTimeout(async () => {
-        await axios.delete(`https://moodjournal-lo9i.onrender.com/${id}`);
-        setMoods(moods.filter(m => m._id !== id)); // Remove from state
-      }, 300); // Match animation duration
+        await axios.delete(`https://moodjournal-lo9i.onrender.com/api/moods/${id}`); // ✅ Correct endpoint
+        setMoods(moods.filter(m => m._id !== id));
+      }, 300);
     } catch (error) {
       console.error("Error deleting mood:", error);
     }
   };
 
-  // Function to add a new mood
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!mood) return;
 
     try {
-      const response = await axios.post("https://moodjournal-lo9i.onrender.com", {
+      const response = await axios.post("https://moodjournal-lo9i.onrender.com/api/moods", { // ✅ Correct endpoint
         mood,
         description
       });
-      setMoods([response.data, ...moods]); // Update state with new mood
+      setMoods([response.data, ...moods]);
       setMood("");
       setDescription("");
     } catch (error) {
