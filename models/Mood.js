@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 
 const MoodSchema = new mongoose.Schema({
-  mood: { type: String, required: true },
-  description: String
-}, { timestamps: true });  // ✅ Adds createdAt & updatedAt automatically
+  mood: String,
+  description: String,
+  createdAt: { type: Date, default: Date.now } // ✅ Auto-add timestamp
+});
 
 module.exports = mongoose.model("Mood", MoodSchema);

@@ -10,7 +10,10 @@ function MoodChart({ moods }) {
   };
 
   const formattedData = moods.map(m => ({
-    date: new Date(m.createdAt).toLocaleDateString("en-US"),
+    dateTime: new Date(m.createdAt).toLocaleString("en-US", { 
+      hour: '2-digit', minute: '2-digit', hour12: true 
+    }), // ✅ Shows time
+    date: new Date(m.createdAt).toLocaleDateString("en-US"), // ✅ Keeps date
     moodValue: moodScale[m.mood.toLowerCase()] || 3,
     moodLabel: m.mood
   }));
@@ -18,9 +21,9 @@ function MoodChart({ moods }) {
   return (
     <div className="chart-container">
       <h3>Mood Trends</h3>
-      <ResponsiveContainer width="90%" height={300}> {/* ✅ Fix width */}
+      <ResponsiveContainer width="90%" height={300}>
         <LineChart data={formattedData}>
-          <XAxis dataKey="date" />
+          <XAxis dataKey="dateTime" angle={-20} textAnchor="end" /> {/* ✅ Show Time */}
           <YAxis domain={[1, 5]} tickFormatter={(tick) => {
             const moods = { 1: "Angry", 2: "Sad", 3: "Neutral", 4: "Joyful", 5: "Happy" };
             return moods[tick] || tick;
@@ -28,7 +31,7 @@ function MoodChart({ moods }) {
           <CartesianGrid stroke="#ccc" />
           <Tooltip 
             formatter={(value, name, props) => {
-              return [`Mood: ${props.payload.moodLabel}`, "Date: " + props.payload.date];
+              return [`Mood: ${props.payload.moodLabel}`, `Date: ${props.payload.date} - ${props.payload.dateTime}`];
             }}
           />
           <Legend />
