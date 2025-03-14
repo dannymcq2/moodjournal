@@ -16,7 +16,6 @@
     "web-vitals": "^2.1.4"
   },
 "scripts": {
-  "start": "npx serve -s build",
   "build": "react-scripts build"
 },
   "eslintConfig": {
